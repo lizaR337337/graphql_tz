@@ -4,6 +4,7 @@ import com.example.graphql_tz.model.Author;
 import com.example.graphql_tz.model.Book;
 import com.example.graphql_tz.repository.AuthorRepository;
 import com.example.graphql_tz.repository.BookRepository;
+import graphql.GraphQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,17 +28,13 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Author saveAuthor(Author author) {
-        return authorRepository.save(author);
-    }
-
-    @Override
     public List<Book> getBooksByAuthor(Author author) {
         return getAuthorByName(author.getName()).getBooks();
     }
 
     @Override
     public Author save(Author author, String[] books) {
+
         author.setBooks(Arrays.stream(books)
                 .map(title -> {
                     Book book = bookRepository.getBookByTitle(title);

@@ -35,5 +35,4 @@ public class GraphqlTzApplication implements CommandLineRunner {
         bookService.save(new Book("Book2"), authorNames2);
 
     }
-
 }
